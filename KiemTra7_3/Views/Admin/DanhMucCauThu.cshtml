@@ -1,0 +1,80 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "DanhMucCauThu";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+@using KiemTra7_3.Models
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Cauthu>
+
+<h1>DanhMucCauThu</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Vị trí
+            </th>
+            <th>
+                Quốc tịch
+            </th>
+            <th>
+                Số áo
+            </th>
+            <th>
+                Ảnh
+            </th>
+            <th>
+                Câu lạc bộ
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoVaTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaysinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViTri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuocTich)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoAo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CauLacBo.CauLacBoId)
+            </td>
+            <td>
+                <a asp-controller="Admin" asp-action="SuaSanPham" asp-route-maSanPham="@item.CauThuId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CauThuId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CauThuId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model,page => Url.Action("DanhMucCauThu", new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+	LiElementClasses = new List<String> {"page-item"},
+	PageClasses = new List<String> {"page-link"}
+})

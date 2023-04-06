@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Trandau>
+
+<ul class="site-menu js-clone-nav d-none d-lg-block">
+	@foreach (var item in Model)
+	{
+		var getUrl = "https://localhost:7250/api/productsapi/" + @item.TranDauId;
+		<li>
+			<a style="cursor: pointer" onclick="ShowProductsByCategory('@getUrl');">@item.TranDauId</a>
+		</li>
+	}
+</ul>
+
+<script>
+	function ShowProductsByCategory(getUrl) {
+		var str = "";
+		$.ajax({
+			type: 'GET',
+			url: getUrl,
+			dataType: 'json',
+			success: function (data) {
+				$.each(data, function (key, val) {
+					console.log('Ok', key, val)
+					str += `
+			<div class="col-md-6 col-lg-4 mb-5">
+		<div class="hotel-room text-center">
+				<a href="#" class="d-block mb-0 thumbnail">`
+					str += '<img src ="../Hotel/images/' + val.anhCauThu + '"alt = "anhLoi" class="img-fluid"></a>'
+			str += `<div class="hotel-room-body">
+				<h3 class="heading mb-0"><a href="#">${val.HoVaTen}</a></h3>
+				<strong class="price">${val.QuocTich}</strong>
+			</div>
+		</div>
+	</div>
+				`
+				});
+				$('#divmain').html(str);
+			},
+			Error: function (xhr) {
+				alert(xhr.responeText);
+			}
+		})
+		console.log(str);
+	}
+</script>
