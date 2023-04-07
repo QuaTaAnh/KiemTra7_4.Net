@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<QlbongDaContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("QlbongDaContext")));
 
-builder.Services.AddScoped<ITranDau, CTranDau>();
+builder.Services.AddScoped<ISanVanDong, CSanVanDong>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

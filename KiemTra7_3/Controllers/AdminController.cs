@@ -25,53 +25,11 @@ namespace KiemTra7_3.Controllers
             PagedList<Cauthu> lst = new PagedList<Cauthu>(lstSanPham, pageNumber, pageSize);
             return View(lst);
         }
-        //Sửa sản phẩm
-        [Route("SuaSanPham")]
-        [HttpGet]
-        public IActionResult SuaSanPham(string maSanPham)
+        //Chi Tiet
+        public IActionResult ChiTietCauThu(string idCauThu)
         {
-            ViewBag.CauLacBoId = new SelectList(db.Caulacbos.ToList(),
-                "CauLacBoId", "TenClb");
-            var sanpham = db.Cauthus.Find(maSanPham);
-            return View(sanpham);
+            var list = db.Cauthus.SingleOrDefault(x => x.CauThuId == idCauThu);
+            return View(list);
         }
-
-        [Route("SuaSanPham")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SuaSanPham(Cauthu sanpham)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sanpham).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sanpham);
-        }
-
-        //Thêm mới sản phẩm
-        [Route("ThemSanPham")]
-        [HttpGet]
-        public IActionResult ThemSanPham()
-        {
-            ViewBag.CauLacBoId = new SelectList(db.Caulacbos.ToList(),
-                "CauLacBoId", "TenClb");
-            return View();
-        }
-
-        [Route("ThemSanPham")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult themSanPham(Cauthu sanpham)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Cauthus.Add(sanpham);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sanpham);
-        }
-	}
+    }
 }

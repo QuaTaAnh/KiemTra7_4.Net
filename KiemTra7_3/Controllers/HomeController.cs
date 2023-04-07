@@ -17,8 +17,8 @@ namespace KiemTra7_3.Controllers
 
         public IActionResult Index()
         {
-            var id = "102";
-            List<Cauthu> lst = db.Cauthus.AsNoTracking().Where(x => x.CauLacBoId == id).ToList();
+            var id = "DF";
+            List<Cauthu> lst = db.Cauthus.AsNoTracking().Where(x => x.ViTri == id).ToList();
             return View(lst);
         }
 

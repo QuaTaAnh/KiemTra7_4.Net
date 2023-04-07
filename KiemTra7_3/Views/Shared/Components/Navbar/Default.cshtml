@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Trandau>
+﻿@model IEnumerable<Sanvandong>
 
 <ul class="site-menu js-clone-nav d-none d-lg-block">
 	@foreach (var item in Model)
 	{
-		var getUrl = "https://localhost:7250/api/productsapi/" + @item.TranDauId;
+		var getUrl = "https://localhost:7250/api/productsapi/" + @item.SanVanDongId;
 		<li>
-			<a style="cursor: pointer" onclick="ShowProductsByCategory('@getUrl');">@item.TranDauId</a>
+			<a style="cursor: pointer" onclick="ShowProductsByCategory('@getUrl');">@item.TenSan</a>
 		</li>
 	}
 </ul>
@@ -26,8 +26,8 @@
 				<a href="#" class="d-block mb-0 thumbnail">`
 					str += '<img src ="../Hotel/images/' + val.anhCauThu + '"alt = "anhLoi" class="img-fluid"></a>'
 			str += `<div class="hotel-room-body">
-				<h3 class="heading mb-0"><a href="#">${val.HoVaTen}</a></h3>
-				<strong class="price">${val.QuocTich}</strong>
+				<h3 class="heading mb-0"><a href="#">${val.tenCauThu}</a></h3>
+				<strong class="price">${val.quocGia}</strong>
 			</div>
 		</div>
 	</div>

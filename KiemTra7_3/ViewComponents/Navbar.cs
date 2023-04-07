@@ -7,14 +7,14 @@ namespace KiemTra7_3.ViewComponents
     public class Navbar:ViewComponent
     {
         QlbongDaContext db = new QlbongDaContext();
-        private readonly ITranDau _navbar;
-        public Navbar(ITranDau navSpRepository)
+        private readonly ISanVanDong _navbar;
+        public Navbar(ISanVanDong navSpRepository)
         {
             _navbar = navSpRepository;
         }
         public IViewComponentResult Invoke()
         {
-            var navbar = db.Trandaus.Take(7).ToList();
+            var navbar = _navbar.GetAllSanVanDong().OrderBy(x => x.TenSan);
             return View(navbar);
         }
     }

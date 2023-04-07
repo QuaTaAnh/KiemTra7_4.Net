@@ -13,12 +13,12 @@ namespace KiemTra7_3.Controllers
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
-            var products = (from a in db.TrandauCauthus
-                            join b in db.Cauthus on a.CauThuId equals b.CauThuId
+            var products = (from a in db.Caulacbos
+                            join b in db.Cauthus on a.CauLacBoId equals b.CauLacBoId
                             select new Product
                             {
-                                IdCauThu = a.CauThuId,
-                                IdTranDau = a.TranDauId,
+                                IdCauThu = b.CauThuId,
+                                IdSanVanDong = a.SanVanDongId,
                                 TenCauThu = b.HoVaTen,
                                 AnhCauThu = b.Anh,
                                 QuocGia = b.QuocTich,
@@ -26,16 +26,16 @@ namespace KiemTra7_3.Controllers
             return products;
         }
 
-        [HttpGet("{TranDauId}")]
-        public IEnumerable<Product> GetProductsByCategory(string TranDauId)
+        [HttpGet("{SanVanDongId}")]
+        public IEnumerable<Product> GetProductsByCategory(string SanVanDongId)
         {
-            var products = (from a in db.TrandauCauthus
-                            join b in db.Cauthus on a.CauThuId equals b.CauThuId
-							where a.TranDauId == TranDauId
-							select new Product
+            var products = (from a in db.Caulacbos
+                            join b in db.Cauthus on a.CauLacBoId equals b.CauLacBoId
+                            where a.SanVanDongId == SanVanDongId
+                            select new Product
                             {
-                                IdCauThu = a.CauThuId,
-                                IdTranDau = a.TranDauId,
+                                IdCauThu = b.CauThuId,
+                                IdSanVanDong = a.SanVanDongId,
                                 TenCauThu = b.HoVaTen,
                                 AnhCauThu = b.Anh,
                                 QuocGia = b.QuocTich,
